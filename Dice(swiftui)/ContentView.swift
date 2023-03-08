@@ -8,15 +8,36 @@
 import SwiftUI
 
 struct ContentView: View {
+   @State var leftSideCount = 1
+   @State var rightSideCount = 1
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        ZStack {
+            Image("background")
+               
+            VStack {
+                Image("diceeLogo")
+                Spacer()
+                HStack {
+                    Image("dice\(leftSideCount)").resizable()
+                        .aspectRatio(contentMode: .fit)
+                    Spacer()
+                    Image("dice\(rightSideCount)").resizable()
+                        .aspectRatio(contentMode: .fit)
+                }
+                Spacer()
+                Button("deal") {
+                    deal()
+                }.foregroundColor(.red)
+            }
+           
         }
-        .padding()
     }
+    
+    private func deal(){
+       leftSideCount = Int.random(in: 1...6)
+        rightSideCount = Int.random(in: 1...6)
+    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
