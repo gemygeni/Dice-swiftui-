@@ -12,22 +12,33 @@ struct ContentView: View {
    @State var rightSideCount = 1
     var body: some View {
         ZStack {
-            Image("background")
+            Image("background").resizable()
+                .ignoresSafeArea()
                
             VStack {
                 Image("diceeLogo")
                 Spacer()
                 HStack {
                     Image("dice\(leftSideCount)").resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(1, contentMode: .fit)
+                        .padding()
                     Spacer()
                     Image("dice\(rightSideCount)").resizable()
-                        .aspectRatio(contentMode: .fit)
-                }
+                        .aspectRatio(1, contentMode: .fit)
+                        .padding()
+                }.padding(.horizontal)
                 Spacer()
-                Button("deal") {
+                Button {
                     deal()
-                }.foregroundColor(.red)
+                } label: {
+                    
+                    Text("Roll").fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .font(.system(size: 50))
+                        .padding(.horizontal)
+                        .background(Color.red)
+                }.padding()
+
             }
            
         }
